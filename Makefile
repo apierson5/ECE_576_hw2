@@ -1,9 +1,10 @@
 #sample 'make' build executable file for cpp program
 #need to change the following line to your SYSTEMC path
-SYSTEMC=C:\dev\systemc-2.3.3\systemc-2.3.3
+SYSTEMC=C:\dev\systemc-2.3.3\
 
 CC = g++
 
+TARGET = main
 INCLUDES = -I. -I$(SYSTEMC)/include
 LFLAGS = -L. -L$(SYSTEMC)/lib-linux64 
 LIBS = -lsystemc
@@ -11,11 +12,9 @@ LIBS = -lsystemc
 #This line needs to change to the name of the .cpp file, without the file extension
 MAIN = main
 
-SRCS = $(MAIN).cpp
+SRCS = $(shell ls *.cpp)
 
-
-
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 
 
 export LD_LIBRARY_PATH := $(SYSTEMC)/lib-linux64
@@ -26,7 +25,7 @@ all: $(MAIN)
 
 default: $(MAIN)
 
-$(MAIN): $(MAIN).o	
+$(MAIN): $(OBJS)	
 	$(CC) $(INCLUDES) $(LFLAGS) $(LIBS) -o $(MAIN) $(OBJS)
 	
 $(MAIN).o:
