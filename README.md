@@ -1,3 +1,3 @@
 # ECE_576_hw2
 
-Can change which part of the assignment to observe by commented/uncommenting #define statements in "assignment_part.h".
+Can change which part of the assignment to observe by commenting/uncommenting #define statements in "assignment_part.h".
