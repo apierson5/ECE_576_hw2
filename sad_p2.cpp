@@ -1,7 +1,3 @@
-/*
-* 
-*/
-
 #include "sad.h"
 
 #ifdef PART_2 // see assignment_part.h

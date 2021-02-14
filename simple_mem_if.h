@@ -1,4 +1,3 @@
-
 #ifndef SIMPLE_MEM_IF_H
 #define SIMPLE_MEM_IF_H
 

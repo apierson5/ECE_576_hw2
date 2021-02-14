@@ -1,11 +1,15 @@
 /*
-* Author: Austin Pierson
+* Author: Austin Pierson, ...
+* Group: 4
 * Date: February 14, 2021
 * Course: ECE 576
 * Description: This assignment is an introduction to modeling with SystemC.
-* The assignment consists of creating an untimed SAD component, a mixed
-* cycle-accurate and approximate-timed SAD model, an approximate-timed SAD
-* model, and a cycle-accurate memory model.
+* The assignment consists of creating an untimed SAD component and a mixed
+* cycle-accurate and approximate-timed SAD model involving a memory component.
+* The SAD component will compute values from memory. Memory values are obtained
+* from an input file (specified by user through command line argument <see below>)
+* 
+* Usage: main memFileName
 */
 
 #include <systemc.h>

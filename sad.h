@@ -1,4 +1,3 @@
-
 #ifndef SAD_H
 #define SAD_H
 

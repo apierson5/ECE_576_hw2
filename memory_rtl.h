@@ -1,4 +1,3 @@
-
 #ifndef MEMORY_RTL_H
 #define MEMORY_RTL_H
 

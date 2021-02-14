@@ -1,4 +1,3 @@
-
 #ifndef TOP_H
 #define TOP_H
 
@@ -20,7 +19,7 @@ public:
 	Top(sc_module_name name, char* memInitFileName) : sc_module(name), memory_0("MEMORY_0", memInitFileName), sad_0("SAD_0")
 	{
 		sad_0.bus(memory_0);
-		//memory_0.printMemData();
+
 #ifdef PART_2
 		// inputs for memRTL
 		memory_0.memRTL->Clk(s_clk);
