@@ -1,5 +1,5 @@
 /*
-* Author: Austin Pierson, ...
+* Author: Austin Pierson, ..., ...
 * Group: 4
 * Date: February 14, 2021
 * Course: ECE 576

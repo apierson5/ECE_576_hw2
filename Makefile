@@ -1,6 +1,10 @@
 #sample 'make' build executable file for cpp program
 #need to change the following line to your SYSTEMC path
+<<<<<<< HEAD
 SYSTEMC=C:\dev\systemc-2.3.3\systemc-2.3.3\
+=======
+SYSTEMC=C:\dev\systemc-2.3.3\
+>>>>>>> cebc3ae821e15583a679e11acf8154812a2da0ba
 
 CC = g++
 
