@@ -32,6 +32,9 @@ public:
 		memory_0.memRTL->DataOut(s_dataout);
 		memory_0.memRTL->Ack(s_ack);
 
+		// inputs for memory_0 interface
+		memory_0.Ack(s_ack);
+
 		// outputs for memory_0 interface
 		memory_0.Clk(s_clk);
 		memory_0.Ren(s_ren);

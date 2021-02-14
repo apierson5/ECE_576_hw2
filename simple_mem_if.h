@@ -2,6 +2,7 @@
 #define SIMPLE_MEM_IF_H
 
 #include <systemc.h>
+#include <math.h>
 #include "assignment_part.h"
 
 #define NUM_BLOCKS 1

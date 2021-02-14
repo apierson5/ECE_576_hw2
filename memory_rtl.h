@@ -24,7 +24,7 @@ public:
 	{
 		this->memData = memData;
 		SC_METHOD(rtl);
-		sensitive << Clk.pos();
+		sensitive << Clk.pos() << Ren << Wen << Addr;
 	}
 
 	void rtl(); // memory behaviors

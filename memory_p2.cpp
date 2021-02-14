@@ -2,7 +2,6 @@
 
 #ifdef PART_2 // see assignment_part.h
 
-
 Memory::Memory(sc_module_name name, char* memInitFilename) : sc_module(name)
 {	
 	memFilename = memInitFilename;
@@ -32,7 +31,6 @@ Memory::Memory(sc_module_name name, char* memInitFilename) : sc_module(name)
 	}
 
 	memRTL = new MEMORY_RTL("MEMORY_RTL_0", memData);
-
 	SC_THREAD(oscillator);
 
 	ifs.close();
@@ -46,27 +44,33 @@ bool Memory::Write(unsigned int addr, unsigned int data) // write interface
 	if (addr >= MEM_SIZE) 
 	{ 
 		Wen.write(SC_LOGIC_0); // disable writing since addr invalid
+		Addr.write(addr);
 		return false; 
 	}
 
-	Wen.write(SC_LOGIC_1);
+	// setup
 	DataIn.write(data);
 	Addr.write(addr);
+	wait(2, SC_NS);
+	Wen.write(SC_LOGIC_1);
+	wait(2, SC_NS);
+	if (Ack.read() == SC_LOGIC_1)
+	{
+		cout << "Writing success, Ack received" << endl;
+	}
+	else
+	{
+		cout << "Writing failure, Ack not received" << endl;
+	}
+	wait(2, SC_NS);
+	Wen.write(SC_LOGIC_0);
 
-	// these aren't up-to-date values, need to print after next posedge of clk
 	cout << "Wen: " << Wen.read() << endl;
 	cout << data << endl;
 	cout << "DataIn: " << DataIn.read() << endl;
 	cout << addr << endl;
 	cout << "Addr: " << Addr.read() << endl;
 
-	// write data to output file
-	/*
-	ofstream outputFile;
-	outputFile.open("output.txt");
-	outputFile << memData[addr];
-	outputFile.close();
-	*/
 	return true;
 }
 
@@ -78,14 +82,29 @@ bool Memory::Read(unsigned int addr, unsigned int& data) // read interface
 	// make sure the address is valid
 	if (addr >= MEM_SIZE) 
 	{ 
+		data = 0;
 		Ren.write(SC_LOGIC_0); // disable reading since addr invalid
+		Addr.write(addr);
 		return false; 
 	}
 	data = memData[addr];
-	cout << "Intended data: " << data << endl;
 
-	Ren.write(SC_LOGIC_1);
+	// setup
 	Addr.write(addr);
+	wait(2, SC_NS);
+	Ren.write(SC_LOGIC_1);
+	wait(2, SC_NS);
+	if (Ack.read() == SC_LOGIC_1)
+	{
+		cout << "Reading success, Ack received" << endl;
+	}
+	else
+	{
+		cout << "Reading failure, Ack not received" << endl;
+	}
+	wait(2, SC_NS);
+	Ren.write(SC_LOGIC_0);
+
 
 	// these aren't up-to-date values, need to print after next posedge of clk
 	cout << "Ren: " << Ren.read() << endl;
@@ -105,6 +124,7 @@ void Memory::oscillator()
 		wait(2, SC_NS);
 	}
 }
+
 
 // prints memData up to desired index (default to MEM_SIZE);
 void Memory::printMemData(int endIndex)

@@ -15,6 +15,7 @@ public:
 	MEMORY_RTL* memRTL;
 
 	// interface output signals that connect to MEMORY_RTL
+	sc_in < sc_logic > Ack;
 	sc_out< sc_logic > Wen, Ren, Clk;
 	sc_out< sc_uint<32> > DataIn, Addr;
 

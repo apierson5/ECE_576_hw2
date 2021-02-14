@@ -15,13 +15,14 @@
 #include <systemc.h>
 #include "top.h"
 
+#define SIMULATION_TIME 500 // time in nanoseconds
+
 int sc_main(int argc, char* argv[])
 {
 	Top* top_0;
 
 	// argv[1] is the name of the file to read from
 	top_0 = new Top("Top_0", argv[1]);
-
 #ifdef PART_2
 	// trace timed and cycle-accurate model
 	sc_trace_file* fp;
@@ -38,7 +39,7 @@ int sc_main(int argc, char* argv[])
 	sc_trace(fp, top_0->s_ack, "Ack");
 
 	// begin
-	sc_start(200, SC_NS);
+	sc_start(SIMULATION_TIME, SC_NS);
 	sc_close_vcd_trace_file(fp);
 
 	// display all of memory data to console
